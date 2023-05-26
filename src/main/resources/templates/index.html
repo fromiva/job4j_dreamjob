@@ -21,6 +21,7 @@
                     <a class="nav-item nav-link active" href="/">Главная</a>
                     <a class="nav-item nav-link" th:href="@{/vacancies}">Вакансии</a>
                     <a class="nav-item nav-link" th:href="@{/candidates}">Кандидаты</a>
+                    <a class="nav-item nav-link" th:href="@{/vacancies/create}">Создать вакансию</a>
                 </div>
             </div>
         </div>
@@ -28,7 +29,7 @@
     <div class="container mt-2">
         <h3>Проект job4j_dreamjob</h3>
         <ul>
-            <li><a th:href="@{/vacancies}">Вакансии</a></li>
+            <li><a th:href="@{/vacancies}">Вакансии</a> (<a th:href="@{/vacancies/create}">создать</a>)</li>
             <li><a th:href="@{/candidates}">Кандидаты</a></li>
         </ul>
     </div>
