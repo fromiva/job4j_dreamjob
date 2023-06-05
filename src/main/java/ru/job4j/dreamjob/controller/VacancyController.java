@@ -4,25 +4,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.dreamjob.model.Vacancy;
-import ru.job4j.dreamjob.repository.MemoryVacancyRepository;
-import ru.job4j.dreamjob.repository.VacancyRepository;
+import ru.job4j.dreamjob.service.SimpleVacancyService;
+import ru.job4j.dreamjob.service.VacancyService;
 
 import java.util.Optional;
 
 @Controller
 @RequestMapping("/vacancies")
 public class VacancyController {
-    private final VacancyRepository repository = MemoryVacancyRepository.getInstance();
+    private final VacancyService service = SimpleVacancyService.getInstance();
 
     @GetMapping
     public String getAll(Model model) {
-        model.addAttribute("vacancies", repository.findAll());
+        model.addAttribute("vacancies", service.findAll());
         return "vacancies/list";
     }
 
     @GetMapping("/{id}")
     public String getById(Model model, @PathVariable int id) {
-        Optional<Vacancy> vacancyOptional = repository.findById(id);
+        Optional<Vacancy> vacancyOptional = service.findById(id);
         if (vacancyOptional.isEmpty()) {
             model.addAttribute("message",
                     "Вакансия с указанным идентификатором не найдена");
@@ -39,7 +39,7 @@ public class VacancyController {
 
     @PostMapping("/update")
     public String update(Model model, @ModelAttribute Vacancy vacancy) {
-        boolean success = repository.update(vacancy);
+        boolean success = service.update(vacancy);
         if (!success) {
             model.addAttribute("message",
                     "Вакансия с указанным идентификатором не найдена");
@@ -50,7 +50,7 @@ public class VacancyController {
 
     @GetMapping("/delete/{id}")
     public String delete(Model model, @PathVariable int id) {
-        boolean success = repository.deleteById(id);
+        boolean success = service.deleteById(id);
         if (!success) {
             model.addAttribute("message",
                     "Вакансия с указанным идентификатором не найдена");
@@ -61,7 +61,7 @@ public class VacancyController {
 
     @PostMapping("/create")
     public String create(@ModelAttribute Vacancy vacancy) {
-        repository.save(vacancy);
+        service.save(vacancy);
         return "redirect:/vacancies";
     }
 }
