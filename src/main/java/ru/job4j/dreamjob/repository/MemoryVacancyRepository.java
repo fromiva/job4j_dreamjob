@@ -22,32 +22,38 @@ public final class MemoryVacancyRepository implements VacancyRepository {
                 "Intern Java Developer",
                 "Intern Java Developer vacancy description",
                 LocalDateTime.now().minusDays(6),
-                true));
+                true,
+                1));
         save(new Vacancy(0,
                 "Junior Java Developer",
                 "Junior Java Developer vacancy description",
                 LocalDateTime.now().minusDays(5),
-                false));
+                false,
+                3));
         save(new Vacancy(0,
                 "Junior+ Java Developer",
                 "Junior+ Java Developer vacancy description",
                 LocalDateTime.now().minusDays(4),
-                true));
+                true,
+                2));
         save(new Vacancy(0,
                 "Middle Java Developer",
                 "Middle Java Developer vacancy description",
                 LocalDateTime.now().minusDays(3),
-                true));
+                true,
+                2));
         save(new Vacancy(0,
                 "Middle+ Java Developer",
                 "Middle+ Java Developer vacancy description",
                 LocalDateTime.now().minusDays(2),
-                false));
+                false,
+                3));
         save(new Vacancy(0,
                 "Senior Java Developer",
                 "Senior Java Developer vacancy description",
                 LocalDateTime.now().minusDays(1),
-                true));
+                true,
+                1));
     }
 
     @Override
@@ -71,7 +77,8 @@ public final class MemoryVacancyRepository implements VacancyRepository {
                         vacancy.getTitle(),
                         vacancy.getDescription(),
                         vacancy.getCreationDate(),
-                        vacancy.getVisible()
+                        vacancy.getVisible(),
+                        vacancy.getCityId()
                 )) != null;
     }
 
