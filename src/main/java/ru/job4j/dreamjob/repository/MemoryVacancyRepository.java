@@ -21,27 +21,33 @@ public final class MemoryVacancyRepository implements VacancyRepository {
         save(new Vacancy(0,
                 "Intern Java Developer",
                 "Intern Java Developer vacancy description",
-                LocalDateTime.now().minusDays(6)));
+                LocalDateTime.now().minusDays(6),
+                true));
         save(new Vacancy(0,
                 "Junior Java Developer",
                 "Junior Java Developer vacancy description",
-                LocalDateTime.now().minusDays(5)));
+                LocalDateTime.now().minusDays(5),
+                false));
         save(new Vacancy(0,
                 "Junior+ Java Developer",
                 "Junior+ Java Developer vacancy description",
-                LocalDateTime.now().minusDays(4)));
+                LocalDateTime.now().minusDays(4),
+                true));
         save(new Vacancy(0,
                 "Middle Java Developer",
                 "Middle Java Developer vacancy description",
-                LocalDateTime.now().minusDays(3)));
+                LocalDateTime.now().minusDays(3),
+                true));
         save(new Vacancy(0,
                 "Middle+ Java Developer",
                 "Middle+ Java Developer vacancy description",
-                LocalDateTime.now().minusDays(2)));
+                LocalDateTime.now().minusDays(2),
+                false));
         save(new Vacancy(0,
                 "Senior Java Developer",
                 "Senior Java Developer vacancy description",
-                LocalDateTime.now().minusDays(1)));
+                LocalDateTime.now().minusDays(1),
+                true));
     }
 
     @Override
@@ -64,7 +70,8 @@ public final class MemoryVacancyRepository implements VacancyRepository {
                         oldVacancy.getId(),
                         vacancy.getTitle(),
                         vacancy.getDescription(),
-                        vacancy.getCreationDate()
+                        vacancy.getCreationDate(),
+                        vacancy.getVisible()
                 )) != null;
     }
 
