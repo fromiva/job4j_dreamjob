@@ -23,37 +23,43 @@ public final class MemoryVacancyRepository implements VacancyRepository {
                 "Intern Java Developer vacancy description",
                 LocalDateTime.now().minusDays(6),
                 true,
-                1));
+                1,
+                0));
         save(new Vacancy(0,
                 "Junior Java Developer",
                 "Junior Java Developer vacancy description",
                 LocalDateTime.now().minusDays(5),
                 false,
-                3));
+                3,
+                0));
         save(new Vacancy(0,
                 "Junior+ Java Developer",
                 "Junior+ Java Developer vacancy description",
                 LocalDateTime.now().minusDays(4),
                 true,
-                2));
+                2,
+                0));
         save(new Vacancy(0,
                 "Middle Java Developer",
                 "Middle Java Developer vacancy description",
                 LocalDateTime.now().minusDays(3),
                 true,
-                2));
+                2,
+                0));
         save(new Vacancy(0,
                 "Middle+ Java Developer",
                 "Middle+ Java Developer vacancy description",
                 LocalDateTime.now().minusDays(2),
                 false,
-                3));
+                3,
+                0));
         save(new Vacancy(0,
                 "Senior Java Developer",
                 "Senior Java Developer vacancy description",
                 LocalDateTime.now().minusDays(1),
                 true,
-                1));
+                1,
+                0));
     }
 
     @Override
@@ -78,7 +84,8 @@ public final class MemoryVacancyRepository implements VacancyRepository {
                         vacancy.getDescription(),
                         vacancy.getCreationDate(),
                         vacancy.getVisible(),
-                        vacancy.getCityId()
+                        vacancy.getCityId(),
+                        vacancy.getFileId()
                 )) != null;
     }
 
