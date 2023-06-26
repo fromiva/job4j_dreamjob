@@ -33,7 +33,7 @@ public final class UserController {
         if (result.isEmpty()) {
             model.addAttribute("message",
                     "Ошибка регистрации. Пользователь с указанной почтой уже существует.");
-            return "errors/404";
+            return "users/register";
         }
         return "index";
     }

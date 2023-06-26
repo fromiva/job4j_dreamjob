@@ -29,13 +29,17 @@ public class Sql2oUserRepository implements UserRepository {
                     .addParameter("email", user.getEmail())
                     .addParameter("name", user.getName())
                     .addParameter("password", user.getPassword());
+            int generatedId = -1;
             try {
-                int generatedId = query.executeUpdate().getKey(Integer.class);
-                user.setId(generatedId);
+                generatedId = query.executeUpdate().getKey(Integer.class);
             } catch (Sql2oException exception) {
-                return Optional.empty();
+                System.out.println(exception.getMessage());
             }
-            return Optional.of(user);
+            if (generatedId > 0) {
+                user.setId(generatedId);
+                return Optional.of(user);
+            }
+            return Optional.empty();
         }
     }
 
