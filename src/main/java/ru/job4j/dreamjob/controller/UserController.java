@@ -25,22 +25,14 @@ public final class UserController {
     }
 
     @GetMapping("/register")
-    public String getRegistrationPage(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user != null) {
-            return "redirect:/index";
-        }
-        user = new User();
-        user.setName("Гость");
-        model.addAttribute("user", user);
+    public String getRegistrationPage() {
         return "users/register";
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute User user, Model model) {
+    public String register(@ModelAttribute("name=registerUser") User user, Model model) {
         Optional<User> result = userService.save(user);
         if (result.isEmpty()) {
-            model.addAttribute("user", new User(0, null, "Гость", null));
             model.addAttribute("message",
                     "Ошибка регистрации. Пользователь с указанной почтой уже существует.");
             return "users/register";
@@ -49,23 +41,17 @@ public final class UserController {
     }
 
     @GetMapping("/login")
-    public String getLoginPage(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user != null) {
-            return "redirect:/index";
-        }
-        user = new User();
-        user.setName("Гость");
-        model.addAttribute("user", user);
+    public String getLoginPage() {
         return "users/login";
     }
 
     @PostMapping("/login")
-    public String loginUser(@ModelAttribute User user, Model model, HttpServletRequest request) {
+    public String loginUser(@ModelAttribute("name=loginUser") User user,
+                            Model model,
+                            HttpServletRequest request) {
         Optional<User> userOptional = userService
                 .findByEmailAndPassword(user.getEmail(), user.getPassword());
         if (userOptional.isEmpty()) {
-            model.addAttribute("user", new User(0, null, "Гость", null));
             model.addAttribute("error", "Почта или пароль введены неверно");
             return "users/login";
         }
@@ -74,9 +60,8 @@ public final class UserController {
     }
 
     @GetMapping("/logout")
-    public String logoutUser(Model model, HttpSession session) {
+    public String logoutUser(HttpSession session) {
         session.invalidate();
-        model.addAttribute("user", new User(0, null, "Гость", null));
         return "redirect:/users/login";
     }
 }
