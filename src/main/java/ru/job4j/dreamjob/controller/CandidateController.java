@@ -10,7 +10,6 @@ import ru.job4j.dreamjob.model.Candidate;
 import ru.job4j.dreamjob.service.CandidateService;
 import ru.job4j.dreamjob.service.CityService;
 
-import java.io.IOException;
 import java.util.Optional;
 
 @ThreadSafe
@@ -59,7 +58,7 @@ public final class CandidateController {
             candidateService.save(candidate,
                     new FileDto(file.getOriginalFilename(), file.getBytes()));
             return "redirect:/candidates";
-        } catch (IOException e) {
+        } catch (Exception e) {
             model.addAttribute("message", e.getMessage());
             return "errors/404";
         }
@@ -78,7 +77,7 @@ public final class CandidateController {
                 return "errors/404";
             }
             return "redirect:/candidates";
-        } catch (IOException e) {
+        } catch (Exception e) {
             model.addAttribute("message", e.getMessage());
             return "errors/404";
         }
